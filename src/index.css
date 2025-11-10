@@ -1,0 +1,32 @@
+@import "tailwindcss";
+@plugin "daisyui" {
+  themes: light --default, dark;
+}
+
+@plugin "daisyui/theme" {
+  name: "light";
+  default: true;
+
+  --color-primary: #00aeef; /* Logo blue — main brand color */
+  --color-secondary: #0096c7; /* Slightly darker blue for contrast */
+  --color-accent: #34d399; /* Fresh green accent (leaf/environment vibe) */
+  --color-base-200: #f1f5f9; /* Light background (cool white/slate) */
+  --color-base-300: #e2e8f0; /* Slightly darker section backgrounds */
+}
+
+@plugin "daisyui/theme" {
+  name: "dark";
+  --color-primary: #38bdf8; /* Softer cyan for dark contrast */
+  --color-secondary: #0ea5e9;
+  --color-accent: #22c55e;
+  --color-base-200: #1e293b;
+  --color-base-300: #0f172a;
+}
+
+/* Primary (Blue) → Buttons, links, highlights
+
+Secondary (Dark Cyan) → Navbars, footers, emphasis areas
+
+Accent (Green) → Success/confirm actions, hover states
+
+Base colors → Clean, minimal UI background and card layers */
