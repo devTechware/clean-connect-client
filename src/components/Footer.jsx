@@ -3,11 +3,11 @@ import React from "react";
 const Footer = () => {
   return (
     <footer>
-      <div className="w-11/12 mx-auto footer sm:footer-horizontal bg-base-200 text-base-content py-4">
+      <div className="container mx-auto footer sm:footer-horizontal bg-base-200 text-base-content py-4">
         <aside>
           <img src="/favicon.png" alt="Logo" />
           <p>
-            Clean Connect Inc.
+            Clean Connect
             <br />
             Report. Track. Resolve. Together.
           </p>
@@ -36,7 +36,8 @@ const Footer = () => {
       <div className="footer sm:footer-horizontal footer-center bg-base-200 text-base-content py-4">
         <aside>
           <p>
-            Copyright © {new Date().getFullYear()} - All right reserved by Clean Connect Inc.
+            Copyright © {new Date().getFullYear()} - All right reserved by Clean
+            Connect
           </p>
         </aside>
       </div>
