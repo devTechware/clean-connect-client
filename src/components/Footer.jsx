@@ -2,8 +2,8 @@ import React from "react";
 
 const Footer = () => {
   return (
-    <footer>
-      <div className="container mx-auto footer sm:footer-horizontal bg-base-200 text-base-content py-4">
+    <footer className="container mx-auto space-y-2">
+      <div className="px-4 footer sm:footer-horizontal bg-base-200 text-base-content py-4 rounded-xl">
         <aside>
           <img src="/favicon.png" alt="Logo" />
           <p>
@@ -33,7 +33,7 @@ const Footer = () => {
           <a className="link link-hover">Cookie policy</a>
         </nav>
       </div>
-      <div className="footer sm:footer-horizontal footer-center bg-base-200 text-base-content py-4">
+      <div className="footer sm:footer-horizontal footer-center bg-base-200 text-base-content py-4 rounded-xl">
         <aside>
           <p>
             Copyright © {new Date().getFullYear()} - All right reserved by Clean

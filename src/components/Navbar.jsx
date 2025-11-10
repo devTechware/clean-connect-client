@@ -21,7 +21,7 @@ const Navbar = () => {
     </>
   );
   return (
-    <div className="navbar container mx-auto bg-base-200">
+    <div className="navbar container mx-auto bg-base-200 rounded-xl">
       <div className="navbar-start">
         <div className="dropdown">
           <div tabIndex={0} role="button" className="btn btn-ghost lg:hidden">
@@ -56,8 +56,8 @@ const Navbar = () => {
         <ul className="menu menu-horizontal px-1">{links}</ul>
       </div>
       <div className="navbar-end space-x-2">
-        <a className="btn btn-primary">Login</a>
-        <a className="btn btn-secondary">Register</a>
+        <NavLink to="/login" className="btn btn-primary">Login</NavLink>
+        <NavLink to="/register" className="btn btn-secondary">Register</NavLink>
       </div>
     </div>
   );
