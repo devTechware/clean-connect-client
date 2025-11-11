@@ -1,5 +1,7 @@
+import { Link } from "react-router";
+
 const IssueCard = ({ issue }) => {
-  const { image, title, category, location, amount } = issue || {};
+  const { image, title, category, location, amount, _id } = issue || {};
 
   return (
     <div className="card bg-base-100 border border-base-300 shadow-md hover:shadow-lg transition-shadow rounded-2xl overflow-hidden">
@@ -33,9 +35,9 @@ const IssueCard = ({ issue }) => {
 
         {/* Button */}
         <div className="card-actions justify-end mt-2">
-          <button className="btn btn-sm bg-primary hover:bg-secondary text-white border-none rounded-lg">
+          <Link to={`/issue-details/${_id}`} className="btn btn-sm bg-primary hover:bg-secondary text-white border-none rounded-lg">
             See Details
-          </button>
+          </Link>
         </div>
       </div>
     </div>

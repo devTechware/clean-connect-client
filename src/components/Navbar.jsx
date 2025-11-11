@@ -79,10 +79,10 @@ const Navbar = () => {
             {links}
           </ul>
         </div>
-        <a className="flex items-center text-2xl cursor-pointer">
+        <NavLink to="/" className="flex items-center text-2xl cursor-pointer">
           <img src="/favicon.png" className="w-10 font-bold" alt="" />{" "}
           CleanConnect
-        </a>
+        </NavLink>
       </div>
       <div className="navbar-center hidden lg:flex">
         <ul className="menu menu-horizontal px-1">{links}</ul>

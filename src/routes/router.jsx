@@ -6,6 +6,7 @@ import Login from "../pages/Login";
 import Register from "../pages/Register";
 import AddIssue from "../components/AddIssue";
 import PrivateRoute from "./PrivateRoute";
+import IssueDetails from "../pages/IssueDetails";
 
 const router = createBrowserRouter([
   {
@@ -15,11 +16,20 @@ const router = createBrowserRouter([
       {
         index: true,
         element: <Home />,
+        loader: () => fetch("http://localhost:3000/latest-issues"),
       },
       {
         path: "issues",
         element: <Issues />,
         loader: () => fetch("http://localhost:3000/issues"),
+      },
+      {
+        path: "issue-details/:id",
+        element: (
+          <PrivateRoute>
+            <IssueDetails />
+          </PrivateRoute>
+        ),
       },
       {
         path: "add-issues",
