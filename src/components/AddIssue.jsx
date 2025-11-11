@@ -1,4 +1,48 @@
+import { use } from "react";
+import { AuthContext } from "../contexts/AuthContext";
+import Swal from "sweetalert2";
+
 const AddIssue = () => {
+  const { user } = use(AuthContext);
+  console.log(user?.accessToken);
+
+  const handleAddIssue = (e) => {
+    e.preventDefault();
+    const formData = {
+      title: e.target.title.value,
+      category: e.target.category.value,
+      location: e.target.location.value,
+      description: e.target.description.value,
+      image: e.target.image.value,
+      amount: e.target.amount.value,
+      email: user?.email,
+      date: new Date(),
+    };
+    console.log(formData);
+    fetch("http://localhost:3000/issues", {
+      method: "POST",
+      headers: {
+        "content-type": "application/json",
+        authorization: `Bearer ${user?.accessToken}`,
+      },
+      body: JSON.stringify(formData),
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        Swal.fire({
+          icon: "success",
+          title: "Isuue successfully added",
+          showConfirmButton: false,
+          timer: 1500,
+        });
+        e.target.reset();
+        console.log(data);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
+
   return (
     <div className="flex justify-center items-center min-h-screen bg-linear-to-b from-base-200 to-base-300 py-4 my-4 rounded-xl shadow">
       <div className="card w-full max-w-lg bg-base-100 shadow-xl rounded-2xl border border-base-300">
@@ -10,7 +54,7 @@ const AddIssue = () => {
             Help us make your community cleaner and safer.
           </p>
 
-          <form className="space-y-4">
+          <form onSubmit={handleAddIssue} className="space-y-4">
             {/* Title */}
             <div>
               <label className="label text-secondary font-semibold">
@@ -99,7 +143,7 @@ const AddIssue = () => {
                 placeholder="Enter amount if applicable"
                 className="input input-bordered w-full rounded-xl border-base-300 focus:border-primary focus:ring-primary"
               />
-            </div>            
+            </div>
 
             {/* Submit */}
             <button
