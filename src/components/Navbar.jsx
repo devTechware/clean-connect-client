@@ -1,6 +1,14 @@
 import { NavLink } from "react-router";
+import { AuthContext } from "../contexts/AuthContext";
+import { use } from "react";
 
 const Navbar = () => {
+  const { user, loading } = use(AuthContext);
+  // if (loading) {
+  //   return <>Loading...</>;
+  // }
+  console.log(user?.email);
+
   const links = (
     <>
       <li>
@@ -9,15 +17,19 @@ const Navbar = () => {
       <li>
         <NavLink to="/issues">All Issues</NavLink>
       </li>
-      <li>
-        <NavLink to="/issues">Add Issues</NavLink>
-      </li>
-      <li>
-        <NavLink to="/issues">My Issues</NavLink>
-      </li>
-      <li>
-        <NavLink to="/issues">My Contribution</NavLink>
-      </li>
+      {user && (
+        <>
+          <li>
+            <NavLink to="/add-issues">Add Issues</NavLink>
+          </li>
+          <li>
+            <NavLink to="/issues">My Issues</NavLink>
+          </li>
+          <li>
+            <NavLink to="/issues">My Contribution</NavLink>
+          </li>
+        </>
+      )}
     </>
   );
   return (
@@ -49,15 +61,26 @@ const Navbar = () => {
           </ul>
         </div>
         <a className="flex items-center text-2xl cursor-pointer">
-          <img src="/favicon.png" className="w-10 font-bold" alt="" /> CleanConnect
+          <img src="/favicon.png" className="w-10 font-bold" alt="" />{" "}
+          CleanConnect
         </a>
       </div>
       <div className="navbar-center hidden lg:flex">
         <ul className="menu menu-horizontal px-1">{links}</ul>
       </div>
-      <div className="navbar-end space-x-2">
-        <NavLink to="/login" className="btn btn-primary">Login</NavLink>
-        <NavLink to="/register" className="btn btn-secondary">Register</NavLink>
+      <div className="navbar-end ">
+        {loading ? (
+          <>Loading...</>
+        ) : (
+          <div className="space-x-2">
+            <NavLink to="/login" className="btn btn-primary">
+              Login
+            </NavLink>
+            <NavLink to="/register" className="btn btn-secondary">
+              Register
+            </NavLink>
+          </div>
+        )}
       </div>
     </div>
   );

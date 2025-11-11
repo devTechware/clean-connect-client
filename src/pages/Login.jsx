@@ -39,7 +39,7 @@ const Login = () => {
   };
 
   return (
-    <div className="flex justify-center items-center min-h-screen bg-linear-to-b from-base-200 to-base-300 px-4 my-4 rounded-xl shadow">
+    <div className="flex justify-center items-center min-h-screen bg-linear-to-b from-base-200 to-base-300 py-4 my-4 rounded-xl shadow">
       <div className="card w-full max-w-sm bg-base-100 shadow-xl rounded-2xl border border-base-300">
         <div className="card-body">
           {/* Header */}
@@ -77,7 +77,6 @@ const Login = () => {
                   type={show ? "text" : "password"}
                   name="password"
                   className="input input-bordered w-full rounded-xl border-base-300 focus:border-primary focus:ring-primary"
-                  placeholder="••••••"
                   required
                 />
                 <span
