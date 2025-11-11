@@ -1,6 +1,7 @@
 import { use, useEffect, useState } from "react";
 import { Navigate, useLocation } from "react-router";
 import { AuthContext } from "../contexts/AuthContext";
+import Loading from "../components/Loading";
 
 const PrivateRoute = ({ children }) => {
   const { user, loading } = use(AuthContext);
@@ -14,7 +15,7 @@ const PrivateRoute = ({ children }) => {
   }, [loading]);
 
   if (loading || showLoading) {
-    return <>Loading...</>;
+    return <Loading />;
   }
   if (user) {
     return children;

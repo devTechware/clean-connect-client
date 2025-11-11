@@ -1,13 +1,32 @@
-import { NavLink } from "react-router";
+import { NavLink, useNavigate } from "react-router";
 import { AuthContext } from "../contexts/AuthContext";
 import { use } from "react";
+import userPhoto from "../assets/user.png";
+import Swal from "sweetalert2";
 
 const Navbar = () => {
-  const { user, loading } = use(AuthContext);
-  // if (loading) {
-  //   return <>Loading...</>;
-  // }
-  console.log(user?.email);
+  const { user, signOutUser, loading } = use(AuthContext);
+  const navigate = useNavigate();
+
+  const handleSignOut = () => {
+    signOutUser()
+      .then(() => {
+        Swal.fire({
+          position: "top-end",
+          icon: "success",
+          title: "Signout successful.",
+          showConfirmButton: false,
+          timer: 1500,
+        });
+        setTimeout(() => navigate("/"), 100);
+      })
+      .catch((error) => {
+        Swal.fire({
+          icon: "error",
+          text: error.message,
+        });
+      });
+  };
 
   const links = (
     <>
@@ -71,6 +90,49 @@ const Navbar = () => {
       <div className="navbar-end ">
         {loading ? (
           <>Loading...</>
+        ) : user ? (
+          <div className="dropdown dropdown-end text-center">
+            {/* Avatar Button */}
+            <div
+              tabIndex={0}
+              role="button"
+              className="btn btn-ghost btn-circle avatar hover:scale-105 transition-transform"
+            >
+              <div className="w-10 rounded-full border-2 border-primary shadow-sm">
+                <img
+                  src={user?.photoURL || userPhoto}
+                  alt="User Avatar"
+                  className="rounded-full"
+                />
+              </div>
+            </div>
+
+            {/* Dropdown Menu */}
+            <ul
+              tabIndex={0}
+              className="dropdown-content menu p-4 shadow-lg bg-base-100 border border-base-300 rounded-2xl w-60 mt-2"
+            >
+              {/* User Info */}
+              <li className="text-center mb-2">
+                <h2 className="text-lg font-semibold text-primary">
+                  {user?.displayName || "Clean Connect User"}
+                </h2>
+                <p className="text-sm text-secondary/80">{user?.email}</p>
+              </li>
+
+              <div className="divider my-2"></div>
+
+              {/* Sign Out */}
+              <li>
+                <button
+                  onClick={handleSignOut}
+                  className="btn bg-accent/10 hover:bg-accent hover:text-white text-accent font-semibold rounded-xl border-none w-full transition-all"
+                >
+                  Sign Out
+                </button>
+              </li>
+            </ul>
+          </div>
         ) : (
           <div className="space-x-2">
             <NavLink to="/login" className="btn btn-primary">
