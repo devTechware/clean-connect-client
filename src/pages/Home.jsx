@@ -1,20 +1,54 @@
-import { useLoaderData } from "react-router";
+import { useLoaderData, useLocation } from "react-router";
+import { Fade, Slide, Zoom } from "react-awesome-reveal";
 import CategoryCards from "../components/CategoryCards";
 import HeroSlider from "../components/HeroSlider";
 import IssueCard from "../components/IssueCard";
+import CommunityStats from "../components/CommunityStats";
+import VolunteerCTA from "../components/VolunteerCTA";
+import { useEffect } from "react";
 
 const Home = () => {
   const data = useLoaderData();
+  const { pathname } = useLocation();
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [pathname]);
+
   return (
-    <div className="container mx-auto py-10">
-      <HeroSlider />
-      <CategoryCards />
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3 my-4">
-        {data.map((issue) => (
-          <IssueCard key={issue._id} issue={issue} />
-        ))}
+    <>
+      <title>Home</title>
+      <div className="container mx-auto py-10">
+        {/* Hero Section */}
+        <Zoom>
+          <HeroSlider />
+        </Zoom>
+
+        {/* Category Cards */}
+        <Slide direction="up" cascade damping={0.2}>
+          <CategoryCards />
+        </Slide>
+
+        {/* Recent Issues */}
+        <Fade cascade damping={0.2}>
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3 my-8">
+            {data.map((issue) => (
+              <IssueCard key={issue._id} issue={issue} />
+            ))}
+          </div>
+        </Fade>
+
+        {/* Community Stats */}
+        <Zoom>
+          <CommunityStats />
+        </Zoom>
+
+        {/* Volunteer Call-to-Action */}
+        <Slide direction="right">
+          <VolunteerCTA />
+        </Slide>
       </div>
-    </div>
+    </>
   );
 };
 

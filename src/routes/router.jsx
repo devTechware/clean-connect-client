@@ -4,16 +4,18 @@ import Home from "../pages/Home";
 import Issues from "../pages/Issues";
 import Login from "../pages/Login";
 import Register from "../pages/Register";
-import AddIssue from "../components/AddIssue";
 import PrivateRoute from "./PrivateRoute";
 import IssueDetails from "../pages/IssueDetails";
 import MyIssues from "../pages/MyIssues";
 import MyContributions from "../pages/MyContributions";
+import AddIssue from "../pages/AddIssue";
+import ErrorPage from "../pages/ErrorPage";
 
 const router = createBrowserRouter([
   {
     path: "/",
     element: <MainLayout />,
+    errorElement: <ErrorPage />,
     children: [
       {
         index: true,
@@ -34,7 +36,7 @@ const router = createBrowserRouter([
         ),
       },
       {
-        path: "add-issues",
+        path: "add-issue",
         element: (
           <PrivateRoute>
             <AddIssue />
@@ -43,11 +45,19 @@ const router = createBrowserRouter([
       },
       {
         path: "my-issues",
-        element: <PrivateRoute><MyIssues /></PrivateRoute>
+        element: (
+          <PrivateRoute>
+            <MyIssues />
+          </PrivateRoute>
+        ),
       },
       {
         path: "my-contribution",
-        element: <PrivateRoute><MyContributions /></PrivateRoute>
+        element: (
+          <PrivateRoute>
+            <MyContributions />
+          </PrivateRoute>
+        ),
       },
       {
         path: "login",

@@ -1,6 +1,6 @@
 @import "tailwindcss";
 @plugin "daisyui" {
-   themes: light --default, dark;
+  themes: light --default, dark;
 }
 
 @plugin "daisyui/theme" {
@@ -22,11 +22,3 @@
   --color-base-200: #1e293b;
   --color-base-300: #0f172a;
 }
-
-/* Primary (Blue) → Buttons, links, highlights
-
-Secondary (Dark Cyan) → Navbars, footers, emphasis areas
-
-Accent (Green) → Success/confirm actions, hover states
-
-Base colors → Clean, minimal UI background and card layers */

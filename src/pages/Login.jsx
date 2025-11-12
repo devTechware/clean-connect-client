@@ -39,6 +39,8 @@ const Login = () => {
   };
 
   return (
+    <>
+    <title>Login Page</title>
     <div className="flex justify-center items-center min-h-screen bg-linear-to-b from-base-200 to-base-300 py-4 my-4 rounded-xl shadow">
       <div className="card w-full max-w-sm bg-base-100 shadow-xl rounded-2xl border border-base-300">
         <div className="card-body">
@@ -116,6 +118,7 @@ const Login = () => {
         </div>
       </div>
     </div>
+    </>
   );
 };
 

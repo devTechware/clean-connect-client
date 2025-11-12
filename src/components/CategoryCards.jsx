@@ -1,4 +1,7 @@
+import { use } from "react";
 import { FaTrashAlt, FaBuilding, FaTools, FaRoad } from "react-icons/fa";
+import { AuthContext } from "../contexts/AuthContext";
+import { Link } from "react-router";
 
 const categories = [
   {
@@ -32,6 +35,7 @@ const categories = [
 ];
 
 const CategoryCards = () => {
+  const { user } = use(AuthContext);
   return (
     <section className="py-12 bg-base-100 rounded-xl  my-4">
       <div className="container mx-auto px-6 text-center">
@@ -43,15 +47,18 @@ const CategoryCards = () => {
           {categories.map((cat) => (
             <div
               key={cat.id}
-              className={`card shadow-md hover:shadow-xl transition-all duration-300 ${cat.color} p-6 rounded-2xl border border-base-300`}
+              className={`card shadow-md hover:shadow-xl transition-all duration-300 ${cat.color} p-6 rounded-xl border border-base-300`}
             >
               <div className="flex flex-col items-center gap-4">
                 {cat.icon}
                 <h3 className="text-xl font-semibold">{cat.title}</h3>
                 <p className="text-gray-600 text-sm">{cat.desc}</p>
-                <button className="btn btn-outline btn-primary btn-sm mt-3">
+                <Link
+                  to={user ? "/add-issue" : "/login"}
+                  className="btn btn-outline btn-primary btn-sm mt-3"
+                >
                   Report Now
-                </button>
+                </Link>
               </div>
             </div>
           ))}

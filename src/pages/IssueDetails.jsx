@@ -85,6 +85,7 @@ const IssueDetails = () => {
 
   return (
     <>
+      <title>{`Issue: ${title}`}</title>
       <section className="min-h-screen w-full bg-base-200 flex flex-col lg:flex-row items-center justify-center gap-10 px-8 py-16 transition-colors duration-300 rounded-xl shadow my-4">
         {/* Left: Image */}
         <div className="lg:w-1/2 w-full h-[400px] rounded-3xl overflow-hidden shadow-lg border border-base-300">

@@ -75,105 +75,108 @@ const Register = () => {
   };
 
   return (
-    <div className="flex justify-center items-center min-h-screen bg-linear-to-b from-base-200 to-base-300 py-4 my-4 rounded-xl shadow">
-      <div className="card w-full max-w-sm bg-base-100 shadow-xl rounded-2xl border border-base-300">
-        <div className="card-body">
-          {/* Header */}
-          <h1 className="text-3xl font-bold text-primary text-center mb-3">
-            Join Clean Connect
-          </h1>
-          <p className="text-center text-sm text-secondary mb-6">
-            Create your account to make your community cleaner
-          </p>
+    <>
+      <title>Register Page</title>
+      <div className="flex justify-center items-center min-h-screen bg-linear-to-b from-base-200 to-base-300 py-4 my-4 rounded-xl shadow">
+        <div className="card w-full max-w-sm bg-base-100 shadow-xl rounded-2xl border border-base-300">
+          <div className="card-body">
+            {/* Header */}
+            <h1 className="text-3xl font-bold text-primary text-center mb-3">
+              Join Clean Connect
+            </h1>
+            <p className="text-center text-sm text-secondary mb-6">
+              Create your account to make your community cleaner
+            </p>
 
-          {/* Form */}
-          <form onSubmit={handleRegistration}>
-            <fieldset className="fieldset space-y-4">
-              <div>
-                <label className="label text-secondary font-semibold">
-                  Name
-                </label>
-                <input
-                  type="text"
-                  name="name"
-                  className="input input-bordered w-full rounded-xl border-base-300 focus:border-primary focus:ring-primary"
-                  placeholder="Full Name"
-                  required
-                />
-              </div>
+            {/* Form */}
+            <form onSubmit={handleRegistration}>
+              <fieldset className="fieldset space-y-4">
+                <div>
+                  <label className="label text-secondary font-semibold">
+                    Name
+                  </label>
+                  <input
+                    type="text"
+                    name="name"
+                    className="input input-bordered w-full rounded-xl border-base-300 focus:border-primary focus:ring-primary"
+                    placeholder="Full Name"
+                    required
+                  />
+                </div>
 
-              <div>
-                <label className="label text-secondary font-semibold">
-                  Email
-                </label>
-                <input
-                  type="email"
-                  name="email"
-                  className="input input-bordered w-full rounded-xl border-base-300 focus:border-primary focus:ring-primary"
-                  placeholder="example@email.com"
-                  required
-                />
-              </div>
+                <div>
+                  <label className="label text-secondary font-semibold">
+                    Email
+                  </label>
+                  <input
+                    type="email"
+                    name="email"
+                    className="input input-bordered w-full rounded-xl border-base-300 focus:border-primary focus:ring-primary"
+                    placeholder="example@email.com"
+                    required
+                  />
+                </div>
 
-              <div>
-                <label className="label text-secondary font-semibold">
-                  Photo URL
-                </label>
-                <input
-                  type="text"
-                  name="photo"
-                  className="input input-bordered w-full rounded-xl border-base-300 focus:border-primary focus:ring-primary"
-                  placeholder="https://your-photo-link.com"
-                />
-              </div>
+                <div>
+                  <label className="label text-secondary font-semibold">
+                    Photo URL
+                  </label>
+                  <input
+                    type="text"
+                    name="photo"
+                    className="input input-bordered w-full rounded-xl border-base-300 focus:border-primary focus:ring-primary"
+                    placeholder="https://your-photo-link.com"
+                  />
+                </div>
 
-              <div className="relative">
-                <label className="label text-secondary font-semibold">
-                  Password
-                </label>
-                <input
-                  type={show ? "text" : "password"}
-                  name="password"
-                  className="input input-bordered w-full rounded-xl border-base-300 focus:border-primary focus:ring-primary"
-                  // placeholder="••••••"
-                  required
-                />
-                <span
-                  onClick={() => setShow(!show)}
-                  className="absolute right-4 top-8 text-secondary cursor-pointer z-50"
+                <div className="relative">
+                  <label className="label text-secondary font-semibold">
+                    Password
+                  </label>
+                  <input
+                    type={show ? "text" : "password"}
+                    name="password"
+                    className="input input-bordered w-full rounded-xl border-base-300 focus:border-primary focus:ring-primary"
+                    // placeholder="••••••"
+                    required
+                  />
+                  <span
+                    onClick={() => setShow(!show)}
+                    className="absolute right-4 top-8 text-secondary cursor-pointer z-50"
+                  >
+                    {show ? <FaEye /> : <IoEyeOff />}
+                  </span>
+                </div>
+
+                <button
+                  type="submit"
+                  className="btn w-full bg-primary hover:bg-secondary text-white font-semibold rounded-xl mt-2 border-none"
                 >
-                  {show ? <FaEye /> : <IoEyeOff />}
-                </span>
-              </div>
+                  Register
+                </button>
+              </fieldset>
+            </form>
 
-              <button
-                type="submit"
-                className="btn w-full bg-primary hover:bg-secondary text-white font-semibold rounded-xl mt-2 border-none"
+            {/* Divider */}
+            <div className="divider text-secondary">OR</div>
+
+            {/* Google Login */}
+            <GoogleLogIn />
+
+            {/* Footer */}
+            <p className="text-center text-sm text-secondary mt-4">
+              Already have an account?{" "}
+              <Link
+                className="font-semibold text-accent hover:text-primary transition-colors"
+                to="/login"
               >
-                Register
-              </button>
-            </fieldset>
-          </form>
-
-          {/* Divider */}
-          <div className="divider text-secondary">OR</div>
-
-          {/* Google Login */}
-          <GoogleLogIn />
-
-          {/* Footer */}
-          <p className="text-center text-sm text-secondary mt-4">
-            Already have an account?{" "}
-            <Link
-              className="font-semibold text-accent hover:text-primary transition-colors"
-              to="/login"
-            >
-              Login
-            </Link>
-          </p>
+                Login
+              </Link>
+            </p>
+          </div>
         </div>
       </div>
-    </div>
+    </>
   );
 };
 

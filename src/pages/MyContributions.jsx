@@ -85,58 +85,63 @@ const MyContributions = () => {
   };
 
   return (
-    <div className="min-h-screen bg-base-200 py-12 px-6 my-4 rounded-xl shadow">
-      <div className="max-w-6xl mx-auto bg-base-100 rounded-2xl shadow-lg p-8">
-        <h1 className="text-3xl font-bold text-primary mb-6 text-center">
-          My Cleanup Contributions
-        </h1>
+    <>
+      <title>My Contributions</title>
+      <div className="min-h-screen bg-base-200 py-12 px-6 my-4 rounded-xl shadow">
+        <div className="max-w-6xl mx-auto bg-base-100 rounded-2xl shadow-lg p-8">
+          <h1 className="text-3xl font-bold text-primary mb-6 text-center">
+            My Cleanup Contributions
+          </h1>
 
-        {contributions.length === 0 ? (
-          <p className="text-center text-gray-500 py-10">
-            You haven’t made any cleanup contributions yet.
-          </p>
-        ) : (
-          <div className="overflow-x-auto">
-            <table className="table w-full border border-base-300 rounded-lg">
-              <thead className="bg-base-300 text-primary">
-                <tr>
-                  <th>#</th>
-                  <th>Issue Title</th>
-                  <th>Category</th>
-                  <th>Paid Amount (৳)</th>
-                  <th>Date</th>
-                  <th className="text-center">Action</th>
-                </tr>
-              </thead>
-              <tbody>
-                {contributions.map((item, index) => (
-                  <tr
-                    key={item._id}
-                    className="hover:bg-base-200 transition-all"
-                  >
-                    <td>{index + 1}</td>
-                    <td className="font-semibold">{item.title}</td>
-                    <td className="text-secondary capitalize">
-                      {item.category}
-                    </td>
-                    <td className="font-semibold text-accent">{item.amount}</td>
-                    <td>{new Date(item.date).toLocaleDateString()}</td>
-                    <td className="text-center">
-                      <button
-                        onClick={() => handleDownloadReport(item)}
-                        className="btn btn-sm bg-primary hover:bg-secondary text-white"
-                      >
-                        Download Report
-                      </button>
-                    </td>
+          {contributions.length === 0 ? (
+            <p className="text-center text-gray-500 py-10">
+              You haven’t made any cleanup contributions yet.
+            </p>
+          ) : (
+            <div className="overflow-x-auto">
+              <table className="table w-full border border-base-300 rounded-lg">
+                <thead className="bg-base-300 text-primary">
+                  <tr>
+                    <th>#</th>
+                    <th>Issue Title</th>
+                    <th>Category</th>
+                    <th>Paid Amount (৳)</th>
+                    <th>Date</th>
+                    <th className="text-center">Action</th>
                   </tr>
-                ))}
-              </tbody>
-            </table>
-          </div>
-        )}
+                </thead>
+                <tbody>
+                  {contributions.map((item, index) => (
+                    <tr
+                      key={item._id}
+                      className="hover:bg-base-200 transition-all"
+                    >
+                      <td>{index + 1}</td>
+                      <td className="font-semibold">{item.title}</td>
+                      <td className="text-secondary capitalize">
+                        {item.category}
+                      </td>
+                      <td className="font-semibold text-accent">
+                        {item.amount}
+                      </td>
+                      <td>{new Date(item.date).toLocaleDateString()}</td>
+                      <td className="text-center">
+                        <button
+                          onClick={() => handleDownloadReport(item)}
+                          className="btn btn-sm bg-primary hover:bg-secondary text-white"
+                        >
+                          Download Report
+                        </button>
+                      </td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+          )}
+        </div>
       </div>
-    </div>
+    </>
   );
 };
 
