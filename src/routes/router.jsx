@@ -8,6 +8,7 @@ import AddIssue from "../components/AddIssue";
 import PrivateRoute from "./PrivateRoute";
 import IssueDetails from "../pages/IssueDetails";
 import MyIssues from "../pages/MyIssues";
+import MyContributions from "../pages/MyContributions";
 
 const router = createBrowserRouter([
   {
@@ -46,7 +47,7 @@ const router = createBrowserRouter([
       },
       {
         path: "my-contribution",
-        element: <PrivateRoute><>My Contribution</></PrivateRoute>
+        element: <PrivateRoute><MyContributions /></PrivateRoute>
       },
       {
         path: "login",

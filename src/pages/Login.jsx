@@ -44,7 +44,7 @@ const Login = () => {
         <div className="card-body">
           {/* Header */}
           <h1 className="text-3xl font-bold text-primary text-center mb-3">
-            Welcome Back 👋
+            Welcome Back
           </h1>
           <p className="text-center text-sm text-secondary mb-6">
             Please log in to continue to{" "}

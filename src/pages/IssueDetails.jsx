@@ -17,6 +17,8 @@ const IssueDetails = () => {
     e.preventDefault();
     const contributorData = {
       issueId: id,
+      title,
+      category,
       amount: e.target.amount.value,
       name: e.target.name.value,
       email: user?.email,
@@ -26,7 +28,7 @@ const IssueDetails = () => {
       date: new Date(),
       additionalInfo: e.target.additionalInfo.value,
     };
-    console.log(contributorData);
+
     fetch("http://localhost:3000/contributors", {
       method: "POST",
       headers: {
