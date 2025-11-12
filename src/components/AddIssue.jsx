@@ -18,7 +18,7 @@ const AddIssue = () => {
       email: user?.email,
       date: new Date(),
     };
-    console.log(formData);
+    
     fetch("http://localhost:3000/issues", {
       method: "POST",
       headers: {
@@ -31,7 +31,7 @@ const AddIssue = () => {
       .then((data) => {
         Swal.fire({
           icon: "success",
-          title: "Isuue successfully added",
+          title: "Issue successfully added",
           showConfirmButton: false,
           timer: 1500,
         });

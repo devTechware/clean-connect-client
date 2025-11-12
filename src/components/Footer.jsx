@@ -2,7 +2,7 @@ import React from "react";
 
 const Footer = () => {
   return (
-    <footer className="container mx-auto space-y-2">
+    <footer className="container mx-auto space-y-2 mb-2">
       <div className="px-4 footer sm:footer-horizontal bg-base-200 text-base-content py-4 rounded-xl">
         <aside>
           <img src="/favicon.png" alt="Logo" />
