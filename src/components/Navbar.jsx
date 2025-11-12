@@ -42,10 +42,10 @@ const Navbar = () => {
             <NavLink to="/add-issues">Add Issues</NavLink>
           </li>
           <li>
-            <NavLink to="/issues">My Issues</NavLink>
+            <NavLink to="/my-issues">My Issues</NavLink>
           </li>
           <li>
-            <NavLink to="/issues">My Contribution</NavLink>
+            <NavLink to="/my-contribution">My Contribution</NavLink>
           </li>
         </>
       )}

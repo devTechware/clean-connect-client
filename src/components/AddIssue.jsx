@@ -1,10 +1,11 @@
 import { use } from "react";
 import { AuthContext } from "../contexts/AuthContext";
 import Swal from "sweetalert2";
+import { useNavigate } from "react-router";
 
 const AddIssue = () => {
   const { user } = use(AuthContext);
-  console.log(user?.accessToken);
+  const navigate = useNavigate();
 
   const handleAddIssue = (e) => {
     e.preventDefault();
@@ -15,10 +16,11 @@ const AddIssue = () => {
       description: e.target.description.value,
       image: e.target.image.value,
       amount: e.target.amount.value,
+      status: "ongoing",
       email: user?.email,
       date: new Date(),
     };
-    
+
     fetch("http://localhost:3000/issues", {
       method: "POST",
       headers: {
@@ -36,6 +38,7 @@ const AddIssue = () => {
           timer: 1500,
         });
         e.target.reset();
+        navigate("/my-issues");
         console.log(data);
       })
       .catch((error) => {

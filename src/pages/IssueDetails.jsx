@@ -1,6 +1,7 @@
 import { use, useEffect, useState } from "react";
 import { useParams } from "react-router";
 import { AuthContext } from "../contexts/AuthContext";
+import userPhoto from "../assets/user.png";
 import Swal from "sweetalert2";
 
 const IssueDetails = () => {
@@ -227,9 +228,9 @@ const IssueDetails = () => {
         )}
       </section>
       {/* --- CONTRIBUTORS TABLE SECTION --- */}
-      <section className="my-4 w-full bg-base-100 rounded-2xl shadow-lg p-8 container mx-auto">
+      <section className="my-4 w-full bg-base-100 rounded-xl shadow-lg p-8 container mx-auto">
         <h3 className="text-2xl font-bold text-primary mb-6 text-center">
-          🌿 Community Contributors
+          Community Contributors
         </h3>
 
         {contributors.length === 0 ? (
@@ -246,24 +247,28 @@ const IssueDetails = () => {
                   <th>Amount (৳)</th>
                 </tr>
               </thead>
-              {/* <tbody>
-                {contributors.map((c, index) => (
+              <tbody>
+                {contributors.map((contributor) => (
                   <tr
-                    key={index}
+                    key={contributor._id}
                     className="hover:bg-base-200 transition-colors duration-200"
                   >
                     <td>
                       <img
-                        src={c.image}
-                        alt={c.name}
+                        src={contributor.photo || userPhoto}
+                        alt={contributor.name}
                         className="w-12 h-12 rounded-full object-cover"
                       />
                     </td>
-                    <td className="font-medium text-gray-700">{c.name}</td>
-                    <td className="font-semibold text-accent">৳{c.amount}</td>
+                    <td className="font-medium text-gray-700">
+                      {contributor.name}
+                    </td>
+                    <td className="font-semibold text-accent">
+                      ৳{contributor.amount}
+                    </td>
                   </tr>
                 ))}
-              </tbody> */}
+              </tbody>
             </table>
           </div>
         )}
