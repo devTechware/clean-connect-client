@@ -1,6 +1,6 @@
-import { use, useState } from "react";
+import { use, useEffect, useState } from "react";
 import { AuthContext } from "../contexts/AuthContext";
-import { Link, useNavigate } from "react-router";
+import { Link, useLocation, useNavigate } from "react-router";
 import Swal from "sweetalert2";
 import { FaEye } from "react-icons/fa";
 import { IoEyeOff } from "react-icons/io5";
@@ -10,6 +10,12 @@ const Register = () => {
   const { createUser, updateUser, setLoading } = use(AuthContext);
   const [show, setShow] = useState(false);
   const navigate = useNavigate();
+
+  const { pathname } = useLocation();
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [pathname]);
 
   const handleRegistration = (e) => {
     e.preventDefault();
@@ -33,7 +39,6 @@ const Register = () => {
         updateUser(displayName, photoURL)
           .then(() => {
             Swal.fire({
-              position: "top-end",
               icon: "success",
               title: "Signup successful.",
               showConfirmButton: false,

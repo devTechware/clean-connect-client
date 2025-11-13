@@ -10,6 +10,7 @@ import MyIssues from "../pages/MyIssues";
 import MyContributions from "../pages/MyContributions";
 import AddIssue from "../pages/AddIssue";
 import ErrorPage from "../pages/ErrorPage";
+import Loading from "../components/Loading";
 
 const router = createBrowserRouter([
   {

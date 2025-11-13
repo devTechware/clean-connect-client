@@ -1,7 +1,7 @@
-# 🧹 CleanConnect  
+# 🏠🌿 CleanConnect  
 ### Community Cleanliness & Issue Reporting Portal  
 
-
+🔗 **Live Site:** [https://clean-connect-dev-techware.netlify.app](https://clean-connect-dev-techware.netlify.app)
 
 ---
 
@@ -37,6 +37,7 @@ From garbage disposal to broken public property — users can contribute, monito
 ---
 
 ## 🧭 Project Structure
+
 CleanConnect/
 ├── src/
 │ ├── assets/ # Images and static files
@@ -60,7 +61,7 @@ CleanConnect/
    git clone https://github.com/devTechware/clean-connect-client.git
 
 2. **Navigate into the Project**   
-   cd cleanconnect
+   cd clean-connect-client
 
 3. **Install Dependencies**
    npm run dev
@@ -73,19 +74,19 @@ CleanConnect/
 
 ---
 
-🧑‍🤝‍🧑 Contribution
+## 🧑‍🤝‍🧑 Contribution
 
 Contributions are welcome! Feel free to open an issue or submit a pull request to help make CleanConnect better for everyone.
 
 ---
 
-📜 License
+## 📜 License
 
 This project is licensed under the MIT License — free to use, modify, and distribute with attribution.
 
 ---
 
-💚 Together, we can build a cleaner and better community with CleanConnect.
+## 💚 Together, we can build a cleaner and better community with CleanConnect.
   
 
 

@@ -3,12 +3,15 @@ import { AuthContext } from "../contexts/AuthContext";
 import Swal from "sweetalert2";
 import jsPDF from "jspdf";
 import autoTable from "jspdf-autotable";
+import { useLocation } from "react-router";
 
 const MyContributions = () => {
   const { user } = useContext(AuthContext);
   const [contributions, setContributions] = useState([]);
+  const { pathname } = useLocation();
 
   useEffect(() => {
+    window.scrollTo(0, 0);
     if (!user?.email) return;
 
     const fetchContributions = async () => {
@@ -26,17 +29,19 @@ const MyContributions = () => {
         const data = await res.json();
         setContributions(data);
       } catch (err) {
-        console.error(err);
-        Swal.fire({
-          icon: "error",
-          title: "Error Loading Data",
-          text: "Could not load your contributions. Please try again later.",
-        });
+        {
+          err &&
+            Swal.fire({
+              icon: "error",
+              title: "Error Loading Data",
+              text: "Could not load your contributions. Please try again later.",
+            });
+        }
       }
     };
 
     fetchContributions();
-  }, [user]);
+  }, [pathname, user]);
 
   // Download PDF report
   const handleDownloadReport = (item) => {

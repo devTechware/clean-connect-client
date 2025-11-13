@@ -1,15 +1,17 @@
 import { useEffect, useState, useContext } from "react";
 import Swal from "sweetalert2";
 import { AuthContext } from "../contexts/AuthContext";
+import { useLocation } from "react-router";
 
 const MyIssues = () => {
   const { user } = useContext(AuthContext);
   const [issues, setIssues] = useState([]);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [selectedIssue, setSelectedIssue] = useState(null);
+  const { pathname } = useLocation();
 
-  // ✅ Fetch user's issues
   useEffect(() => {
+    window.scrollTo(0, 0);
     if (!user?.email) return;
     fetch(
       `https://clean-connect-api-server.vercel.app/my-issues?email=${user.email}`,
@@ -21,19 +23,26 @@ const MyIssues = () => {
     )
       .then((res) => res.json())
       .then((result) => setIssues(result))
-      .catch((err) => console.error(err));
-  }, [user]);
+      .catch((error) => {
+        {
+          error &&
+            Swal.fire({
+              icon: "error",
+              title: "Failed to Load Issues",
+              text: "Something went wrong while fetching your issues. Please try again later.",
+              confirmButtonColor: "#00aeef",
+            });
+        }
+      });
+  }, [pathname, user]);
 
-  // ✅ Open/Close modal
   const handleModalToggle = () => setIsModalOpen(!isModalOpen);
 
-  // ✅ Open modal with selected issue data
   const handleUpdateClick = (issue) => {
     setSelectedIssue(issue);
     setIsModalOpen(true);
   };
 
-  // ✅ Handle update form submission
   const handleUpdateIssue = (e) => {
     e.preventDefault();
     const form = e.target;
@@ -66,7 +75,7 @@ const MyIssues = () => {
             icon: "success",
             confirmButtonColor: "#00aeef",
           });
-          // Refresh issues list
+
           setIssues((prev) =>
             prev.map((issue) =>
               issue._id === selectedIssue._id
@@ -82,7 +91,6 @@ const MyIssues = () => {
       });
   };
 
-  // ✅ Delete issue
   const handleDelete = (id) => {
     Swal.fire({
       title: "Are you sure?",
@@ -180,7 +188,6 @@ const MyIssues = () => {
           )}
         </div>
 
-        {/* ✅ Update Issue Modal */}
         {isModalOpen && (
           <div className="fixed inset-0 bg-black/50 backdrop-blur-sm z-50 flex justify-center overflow-y-auto py-10">
             <div className="relative bg-base-100 w-full max-w-lg rounded-2xl shadow-2xl p-6 mx-4 my-auto">

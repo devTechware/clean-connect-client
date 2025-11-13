@@ -36,18 +36,28 @@ const AddIssue = () => {
     })
       .then((res) => res.json())
       .then((data) => {
-        Swal.fire({
-          icon: "success",
-          title: "Issue successfully added",
-          showConfirmButton: false,
-          timer: 1500,
-        });
+        {
+          data &&
+            Swal.fire({
+              icon: "success",
+              title: "Issue successfully added",
+              showConfirmButton: false,
+              timer: 1500,
+            });
+        }
         e.target.reset();
         navigate("/my-issues");
-        console.log(data);
       })
       .catch((error) => {
-        console.log(error);
+        {
+          error &&
+            Swal.fire({
+              icon: "error",
+              title: "Failed to Add Issue",
+              text: "Something went wrong while submitting your issue. Please try again later.",
+              confirmButtonColor: "#3085d6",
+            });
+        }
       });
   };
 

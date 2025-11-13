@@ -5,15 +5,23 @@ import HeroSlider from "../components/HeroSlider";
 import IssueCard from "../components/IssueCard";
 import CommunityStats from "../components/CommunityStats";
 import VolunteerCTA from "../components/VolunteerCTA";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
+import Loading from "../components/Loading";
 
 const Home = () => {
   const data = useLoaderData();
   const { pathname } = useLocation();
+  const [showLoading, setShowLoading] = useState(true);
 
   useEffect(() => {
     window.scrollTo(0, 0);
+    const timer = setTimeout(() => setShowLoading(false), 1000);
+    return () => clearTimeout(timer);
   }, [pathname]);
+
+  if (showLoading) {
+    return <Loading />;
+  }
 
   return (
     <>

@@ -1,19 +1,18 @@
 import { useEffect, useState } from "react";
 import IssueCard from "../components/IssueCard";
 import { useLocation } from "react-router";
+import Loading from "../components/Loading";
+import Swal from "sweetalert2";
 
 const Issues = () => {
   const [issues, setIssues] = useState([]);
   const [category, setCategory] = useState("");
   const [status, setStatus] = useState("");
   const { pathname } = useLocation();
+  const [showLoading, setShowLoading] = useState(true);
 
   useEffect(() => {
     window.scrollTo(0, 0);
-  }, [pathname]);
-
-  // Fetch issues dynamically based on filters
-  useEffect(() => {
     const fetchIssues = async () => {
       try {
         const queryParams = new URLSearchParams();
@@ -26,12 +25,27 @@ const Issues = () => {
         const data = await res.json();
         setIssues(data);
       } catch (err) {
-        console.error("Error fetching filtered issues:", err);
+        {
+          err &&
+            Swal.fire({
+              icon: "error",
+              title: "Failed to Fetch Issues",
+              text: "Something went wrong while loading issues. Please try again later.",
+              confirmButtonColor: "#3085d6",
+            });
+        }
       }
     };
 
     fetchIssues();
-  }, [category, status]);
+
+    const timer = setTimeout(() => setShowLoading(false), 1000);
+    return () => clearTimeout(timer);
+  }, [pathname, category, status]);
+
+  if (showLoading) {
+    return <Loading />;
+  }
 
   return (
     <>
@@ -82,7 +96,6 @@ const Issues = () => {
                 </div>
               </div>
 
-              {/* 🚧 Status Filter */}
               <div className="space-y-2">
                 <h3 className="font-semibold text-secondary text-lg">
                   Filter by Status:
@@ -113,7 +126,6 @@ const Issues = () => {
             </div>
           </div>
 
-          {/* 🧾 Issues Grid */}
           {issues.length === 0 ? (
             <p className="text-center text-gray-500 text-lg mt-10">
               No issues found. Try adjusting your filters.
