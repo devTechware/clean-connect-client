@@ -1,6 +1,6 @@
 const Loading = () => {
   return (
-    <div className="flex flex-col items-center justify-center h-screen bg-linear-to-b from-[#f1f5f9] to-[#e2e8f0]">
+    <div className="flex flex-col items-center justify-center h-screen bg-linear-to-b from-[#f1f5f9] to-[#e2e8f0] my-4 rounded-xl">
       {/* Spinning Circle with Logo Theme */}
       <div className="relative flex items-center justify-center">
         <div className="w-20 h-20 border-4 border-[#bae6fd] border-t-[#00aeef] rounded-full animate-spin"></div>

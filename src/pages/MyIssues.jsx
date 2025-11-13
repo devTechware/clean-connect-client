@@ -11,11 +11,14 @@ const MyIssues = () => {
   // ✅ Fetch user's issues
   useEffect(() => {
     if (!user?.email) return;
-    fetch(`http://localhost:3000/my-issues?email=${user.email}`, {
-      headers: {
-        authorization: `Bearer ${user.accessToken}`,
-      },
-    })
+    fetch(
+      `https://clean-connect-api-server.vercel.app/my-issues?email=${user.email}`,
+      {
+        headers: {
+          authorization: `Bearer ${user.accessToken}`,
+        },
+      }
+    )
       .then((res) => res.json())
       .then((result) => setIssues(result))
       .catch((err) => console.error(err));
@@ -43,14 +46,17 @@ const MyIssues = () => {
       status: form.status.value,
     };
 
-    fetch(`http://localhost:3000/issues/${selectedIssue._id}`, {
-      method: "PATCH",
-      headers: {
-        "Content-Type": "application/json",
-        authorization: `Bearer ${user.accessToken}`,
-      },
-      body: JSON.stringify(updatedIssue),
-    })
+    fetch(
+      `https://clean-connect-api-server.vercel.app/issues/${selectedIssue._id}`,
+      {
+        method: "PATCH",
+        headers: {
+          "Content-Type": "application/json",
+          authorization: `Bearer ${user.accessToken}`,
+        },
+        body: JSON.stringify(updatedIssue),
+      }
+    )
       .then((res) => res.json())
       .then((data) => {
         if (data.modifiedCount > 0) {
@@ -88,7 +94,7 @@ const MyIssues = () => {
       confirmButtonText: "Yes, delete it!",
     }).then((result) => {
       if (result.isConfirmed) {
-        fetch(`http://localhost:3000/issues/${id}`, {
+        fetch(`https://clean-connect-api-server.vercel.app/issues/${id}`, {
           method: "DELETE",
           headers: {
             authorization: `Bearer ${user.accessToken}`,
@@ -107,7 +113,7 @@ const MyIssues = () => {
 
   return (
     <>
-    <title>My Issues</title>
+      <title>My Issues</title>
       <div className="min-h-screen bg-base-200 py-12 px-6 my-4 rounded-xl shadow">
         <div className="max-w-6xl mx-auto bg-base-100 rounded-2xl shadow-lg p-8">
           <h1 className="text-3xl font-bold text-primary mb-6 text-center">

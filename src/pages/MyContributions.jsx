@@ -14,7 +14,7 @@ const MyContributions = () => {
     const fetchContributions = async () => {
       try {
         const res = await fetch(
-          `http://localhost:3000/my-contributions?email=${user.email}`,
+          `https://clean-connect-api-server.vercel.app/my-contributions?email=${user.email}`,
           {
             headers: {
               authorization: `Bearer ${user.accessToken}`,

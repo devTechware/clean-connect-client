@@ -20,12 +20,14 @@ const router = createBrowserRouter([
       {
         index: true,
         element: <Home />,
-        loader: () => fetch("http://localhost:3000/latest-issues"),
+        loader: () =>
+          fetch("https://clean-connect-api-server.vercel.app/latest-issues"),
       },
       {
         path: "issues",
         element: <Issues />,
-        loader: () => fetch("http://localhost:3000/issues"),
+        loader: () =>
+          fetch("https://clean-connect-api-server.vercel.app/issues"),
       },
       {
         path: "issue-details/:id",

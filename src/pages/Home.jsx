@@ -25,7 +25,7 @@ const Home = () => {
         </Zoom>
 
         {/* Category Cards */}
-        <Slide direction="up" cascade damping={0.2}>
+        <Slide direction="up" cascade damping={0.5}>
           <CategoryCards />
         </Slide>
 

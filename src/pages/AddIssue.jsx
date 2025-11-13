@@ -26,7 +26,7 @@ const AddIssue = () => {
       date: new Date(),
     };
 
-    fetch("http://localhost:3000/issues", {
+    fetch("https://clean-connect-api-server.vercel.app/issues", {
       method: "POST",
       headers: {
         "content-type": "application/json",

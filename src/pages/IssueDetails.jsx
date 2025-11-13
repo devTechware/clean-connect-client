@@ -1,24 +1,31 @@
 import { use, useEffect, useState } from "react";
-import { useParams } from "react-router";
+import { useLocation, useParams } from "react-router";
 import { AuthContext } from "../contexts/AuthContext";
-import userPhoto from "../assets/user.png";
 import Swal from "sweetalert2";
+import userPhoto from "../assets/user.png";
+import IssueNotFound from "../components/IssueNotFound"; // ✅ Import this component
+import Loading from "../components/Loading";
 
 const IssueDetails = () => {
   const { id } = useParams();
   const { user } = use(AuthContext);
-  const [issue, setIssue] = useState({});
+  const [issue, setIssue] = useState(null);
   const [contributors, setContributors] = useState([]);
+  const [loading, setLoading] = useState(true); // ✅ Added loading state
+  const [error, setError] = useState(null); // ✅ Added error state
+  const { pathname } = useLocation();
 
   const [isModalOpen, setIsModalOpen] = useState(false);
-  //console.log(user);
+
+  const handleModalToggle = () => setIsModalOpen(!isModalOpen);
 
   const handleContribution = (e) => {
     e.preventDefault();
+
     const contributorData = {
       issueId: id,
-      title,
-      category,
+      title: issue?.title,
+      category: issue?.category,
       amount: e.target.amount.value,
       name: e.target.name.value,
       email: user?.email,
@@ -29,7 +36,7 @@ const IssueDetails = () => {
       additionalInfo: e.target.additionalInfo.value,
     };
 
-    fetch("http://localhost:3000/contributors", {
+    fetch("https://clean-connect-api-server.vercel.app/contributors", {
       method: "POST",
       headers: {
         "content-type": "application/json",
@@ -39,53 +46,90 @@ const IssueDetails = () => {
     })
       .then((res) => res.json())
       .then((data) => {
-        Swal.fire({
-          icon: "success",
-          title: "Thank you for your contribution",
-          showConfirmButton: false,
-          timer: 1500,
-        });
+        {
+          data &&
+            Swal.fire({
+              icon: "success",
+              title: "Thank you for your contribution",
+              showConfirmButton: false,
+              timer: 1500,
+            });
+        }
+
+        // Refresh contributors
+        fetch(
+          `https://clean-connect-api-server.vercel.app/contributors/${id}`,
+          {
+            headers: {
+              authorization: `Bearer ${user.accessToken}`,
+            },
+          }
+        )
+          .then((res) => res.json())
+          .then((updatedList) => setContributors(updatedList));
+
         e.target.reset();
-        console.log(data);
       })
-      .catch((error) => {
-        console.log(error);
-      });
+      .catch((error) => console.log(error));
 
     handleModalToggle();
   };
 
-  const handleModalToggle = () => setIsModalOpen(!isModalOpen);
-
+  // ✅ Handle fetching with error catch and 404 check
   useEffect(() => {
-    fetch(`http://localhost:3000/issues/${id}`, {
+    window.scrollTo(0, 0);
+    setLoading(true);
+    setError(null);
+
+    fetch(`https://clean-connect-api-server.vercel.app/issues/${id}`, {
+      headers: {
+        authorization: `Bearer ${user.accessToken}`,
+      },
+    })
+      .then(async (res) => {
+        if (!res.ok) throw new Error("Invalid issue ID");
+        const data = await res.json();
+
+        // If API returns empty or invalid issue
+        if (!data || data?.message === "Issue not found") {
+          throw new Error("Issue not found");
+        }
+
+        setIssue(data);
+      })
+      .catch((err) => {
+        console.error("Error fetching issue:", err.message);
+        setError("Issue not found");
+      })
+      .finally(() => setLoading(false));
+
+    fetch(`https://clean-connect-api-server.vercel.app/contributors/${id}`, {
       headers: {
         authorization: `Bearer ${user.accessToken}`,
       },
     })
       .then((res) => res.json())
-      .then((result) => {
-        setIssue(result);
-      });
-  }, [id, user]);
+      .then((result) => setContributors(result))
+      .catch(() => {});
+  }, [pathname, id, user]);
 
-  useEffect(() => {
-    fetch(`http://localhost:3000/contributors/${id}`, {
-      headers: {
-        authorization: `Bearer ${user.accessToken}`,
-      },
-    })
-      .then((res) => res.json())
-      .then((result) => {
-        setContributors(result);
-      });
-  }, [id, user]);
+  // ✅ Show loading
+  if (loading) {
+    return <Loading />;
+  }
 
+  // ✅ Show not found
+  if (error === "Issue not found" || !issue) {
+    return <IssueNotFound />;
+  }
+
+  // ✅ Destructure safely
   const { image, title, category, location, description, date, amount } = issue;
 
   return (
     <>
       <title>{`Issue: ${title}`}</title>
+      {/* --- MAIN DETAILS SECTION --- */}
       <section className="min-h-screen w-full bg-base-200 flex flex-col lg:flex-row items-center justify-center gap-10 px-8 py-16 transition-colors duration-300 rounded-xl shadow my-4">
         {/* Left: Image */}
         <div className="lg:w-1/2 w-full h-[400px] rounded-3xl overflow-hidden shadow-lg border border-base-300">
@@ -127,7 +171,7 @@ const IssueDetails = () => {
           </div>
         </div>
 
-        {/* MODAL SECTION */}
+        {/* --- MODAL SECTION --- */}
         {isModalOpen && (
           <div className="fixed inset-0 bg-black/50 backdrop-blur-sm z-50 flex justify-center overflow-y-auto py-10">
             <div className="relative bg-base-100 w-full max-w-lg rounded-2xl shadow-2xl p-6 mx-4 my-auto">
@@ -230,6 +274,7 @@ const IssueDetails = () => {
           </div>
         )}
       </section>
+
       {/* --- CONTRIBUTORS TABLE SECTION --- */}
       <section className="my-4 w-full bg-base-100 rounded-xl shadow-lg p-8 container mx-auto">
         <h3 className="text-2xl font-bold text-primary mb-6 text-center">

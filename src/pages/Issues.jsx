@@ -1,10 +1,16 @@
 import { useEffect, useState } from "react";
 import IssueCard from "../components/IssueCard";
+import { useLocation } from "react-router";
 
 const Issues = () => {
   const [issues, setIssues] = useState([]);
   const [category, setCategory] = useState("");
   const [status, setStatus] = useState("");
+  const { pathname } = useLocation();
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [pathname]);
 
   // Fetch issues dynamically based on filters
   useEffect(() => {
@@ -14,7 +20,9 @@ const Issues = () => {
         if (category) queryParams.append("category", category);
         if (status) queryParams.append("status", status);
 
-        const res = await fetch(`http://localhost:3000/issues?${queryParams}`);
+        const res = await fetch(
+          `https://clean-connect-api-server.vercel.app/issues?${queryParams}`
+        );
         const data = await res.json();
         setIssues(data);
       } catch (err) {
