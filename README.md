@@ -60,24 +60,41 @@ CLEAN-CONNECT-CLIENT/
 └── README.md
 
 ```
+
 ---
 
 ## 🚀 How to Run Locally
 
 1. **Clone the Repository**
+
+```bash
    git clone https://github.com/devTechware/clean-connect-client.git
+```
 
 2. **Navigate into the Project**
+
+```bash
    cd clean-connect-client
+```
 
 3. **Install Dependencies**
-   npm run dev
+   npm install
+
+```bash
+   npm install
+```
 
 4. **Start Development Server**
+
+```bash
    npm run dev
+```
 
 5. **Open in Browser**
+
+```bash
    http://localhost:5173
+```
 
 ---
 
@@ -94,4 +111,3 @@ This project is licensed under the MIT License — free to use, modify, and dist
 ---
 
 ## 💚 Together, we can build a cleaner and better community with CleanConnect.
-
