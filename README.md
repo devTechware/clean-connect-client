@@ -21,7 +21,7 @@ From garbage disposal to broken public property — users can contribute, monito
 - 🙌 **Volunteer & Join Drives:** Participate in ongoing community cleanup efforts via the volunteer call-to-action section.
 - 📱 **Modern, Responsive UI:** Clean and adaptive design powered by Tailwind CSS and DaisyUI with smooth animations.
 
----
+  ***
 
 ## 🧰 Technologies Used
 
@@ -45,19 +45,52 @@ From garbage disposal to broken public property — users can contribute, monito
 ```bash
 CLEAN-CONNECT-CLIENT/
 ├── public/
+│   ├── _redirects
 │   └── favicon.png
 ├── src/
 │   ├── assets/
+│   ├   └── user.png
 │   ├── components/
+│   ├   ├── CategoryCards.jsx
+│   ├   ├── CommunityStats.jsx
+│   ├   ├── Footer.jsx
+│   ├   ├── GoogleLogIn.jsx
+│   ├   ├── HeroSlider.jsx
+│   ├   ├── IssueCard.jsx
+│   ├   ├── IssueNotFound.jsx
+│   ├   ├── Loading.jsx
+│   ├   ├── Navbar.jsx
+│   ├   └── VolunteerCTA.jsx
 │   ├── contexts/
+│   ├   ├── AuthContext.jsx
+│   ├   └── AuthProvider.jsx
 │   ├── firebase/
+│   ├   └── Firebase.config.js
 │   ├── layouts/
+│   ├   └── MainLayout.jsx
 │   ├── pages/
+│   ├   ├── AddIssue.jsx
+│   ├   ├── ErrorPage.jsx
+│   ├   ├── Home.jsx
+│   ├   ├── IssueDetails.jsx
+│   ├   ├── Issues.jsx
+│   ├   ├── Login.jsx
+│   ├   ├── MyContributions.jsx
+│   ├   ├── MyIssues.jsx
+│   ├   └── Register.jsx
 │   ├── routes/
+│   ├   ├── PrivateRoute.jsx
+│   ├   └── router.jsx
 │   ├── index.css
 │   └── main.jsx
+├── .env                   # Environment variables (not in git)
+├── .gitignore
+├── eslint.config.js
+├── index.html
+├── package-lock.json
 ├── package.json
-└── README.md
+├── README.md
+└── vite.config.js
 
 ```
 

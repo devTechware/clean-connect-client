@@ -103,16 +103,16 @@ const IssueDetails = () => {
 
         setIssue(data);
       })
-      .catch((err) => {
+      .catch(() => {
         setError("Issue not found");
-        Swal.fire({
-          icon: "error",
-          title: "Issue Not Found",
-          text:
-            err.message === "Issue not found"
-              ? "The requested issue could not be found. It may have been removed."
-              : "Failed to load the issue. Please try again later.",
-        });
+        // Swal.fire({
+        //   icon: "error",
+        //   title: "Issue Not Found",
+        //   text:
+        //     err.message === "Issue not found"
+        //       ? "The requested issue could not be found. It may have been removed."
+        //       : "Failed to load the issue. Please try again later.",
+        // });
       })
       .finally(() => setLoading(false));
 
