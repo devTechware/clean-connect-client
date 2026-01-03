@@ -69,6 +69,7 @@ CLEAN-CONNECT-CLIENT/
 │   ├── layouts/
 │   ├   └── MainLayout.jsx
 │   ├── pages/
+│   ├   ├── About.jsx
 │   ├   ├── AddIssue.jsx
 │   ├   ├── ErrorPage.jsx
 │   ├   ├── Home.jsx

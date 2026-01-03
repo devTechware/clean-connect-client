@@ -42,6 +42,7 @@ const Navbar = () => {
       });
   };
 
+  // 🔥 MAIN CHANGE: Added About, Contact, and Dashboard links
   const links = (
     <>
       <li>
@@ -50,8 +51,20 @@ const Navbar = () => {
       <li>
         <NavLink to="/issues">All Issues</NavLink>
       </li>
+      {/* ✨ NEW: About link */}
+      <li>
+        <NavLink to="/about">About</NavLink>
+      </li>
+      {/* ✨ NEW: Contact link */}
+      <li>
+        <NavLink to="/contact">Contact</NavLink>
+      </li>
       {user && (
         <>
+          {/* ✨ NEW: Dashboard link */}
+          <li>
+            <NavLink to="/dashboard">Dashboard</NavLink>
+          </li>
           <li>
             <NavLink to="/add-issue">Add Issues</NavLink>
           </li>
@@ -67,7 +80,8 @@ const Navbar = () => {
   );
 
   return (
-    <div className="sticky top-0 z-50 navbar container mx-auto bg-base-200 rounded-xl mt-2">
+    // 🔥 CHANGE: Added shadow-lg for better visibility
+    <div className="sticky top-0 z-50 navbar container mx-auto bg-base-200 rounded-xl mt-2 shadow-lg">
       <div className="navbar-start">
         <div className="dropdown">
           <div tabIndex={0} role="button" className="btn btn-ghost lg:hidden">
@@ -88,14 +102,15 @@ const Navbar = () => {
           </div>
           <ul
             tabIndex={0}
-            className="menu menu-sm dropdown-content bg-base-100 rounded-box z-1 mt-3 w-52 p-2 shadow"
+            // 🔥 CHANGE: Added z-[100] for better dropdown visibility
+            className="menu menu-sm dropdown-content bg-base-100 rounded-box z-[100] mt-3 w-52 p-2 shadow"
           >
             {links}
           </ul>
         </div>
         <NavLink to="/" className="flex items-center text-2xl cursor-pointer">
           <img src="/favicon.png" className="w-10 font-bold" alt="" />
-          CleanConnect
+          <span className="hidden sm:inline">CleanConnect</span>
         </NavLink>
       </div>
       <div className="navbar-center hidden lg:flex">
@@ -149,22 +164,84 @@ const Navbar = () => {
 
             <ul
               tabIndex={0}
-              className="dropdown-content menu p-4 shadow-lg bg-base-100 border border-base-300 rounded-2xl w-60 mt-2"
+              // 🔥 CHANGE: Added z-[100] and enhanced styling
+              className="dropdown-content menu p-4 shadow-lg bg-base-100 border border-base-300 rounded-2xl w-60 mt-2 z-[100]"
             >
               <li className="text-center mb-2">
-                <h2 className="text-lg font-semibold text-primary">
-                  {user?.displayName || "Clean Connect User"}
-                </h2>
-                <p className="text-sm text-secondary/80">{user?.email}</p>
+                <div className="flex flex-col items-center p-2">
+                  <h2 className="text-lg font-semibold text-primary">
+                    {user?.displayName || "Clean Connect User"}
+                  </h2>
+                  <p className="text-sm text-secondary/80">{user?.email}</p>
+                </div>
               </li>
 
               <div className="divider my-2"></div>
 
+              {/* ✨ NEW: Profile link with icon */}
+              <li>
+                <NavLink to="/dashboard/profile" className="justify-start">
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    className="h-5 w-5"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke="currentColor"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth={2}
+                      d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"
+                    />
+                  </svg>
+                  My Profile
+                </NavLink>
+              </li>
+
+              {/* ✨ NEW: Dashboard Home link with icon */}
+              <li>
+                <NavLink to="/dashboard" className="justify-start">
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    className="h-5 w-5"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke="currentColor"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth={2}
+                      d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"
+                    />
+                  </svg>
+                  Dashboard Home
+                </NavLink>
+              </li>
+
+              <div className="divider my-2"></div>
+
+              {/* 🔥 ENHANCED: Sign out button with icon */}
               <li>
                 <button
                   onClick={handleSignOut}
-                  className="btn bg-accent/10 hover:bg-accent hover:text-white text-accent font-semibold rounded-xl border-none w-full transition-all"
+                  className="btn bg-error/10 hover:bg-error hover:text-white text-error font-semibold rounded-xl border-none w-full transition-all justify-center"
                 >
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    className="h-5 w-5"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke="currentColor"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth={2}
+                      d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1"
+                    />
+                  </svg>
                   Sign Out
                 </button>
               </li>
@@ -204,7 +281,7 @@ const Navbar = () => {
               </div>
               <ul
                 tabIndex={0}
-                className="dropdown-content menu bg-base-100 rounded-box z-1 mt-3 w-40 p-2 shadow"
+                className="dropdown-content menu bg-base-100 rounded-box z-[100] mt-3 w-40 p-2 shadow"
               >
                 <li>
                   <NavLink
